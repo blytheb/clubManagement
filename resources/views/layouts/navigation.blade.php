@@ -17,8 +17,8 @@
                     </x-nav-link>
 
                     @role('admin')
-                    <x-nav-link>
-                        {{-- <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')"> --}}
+                    {{-- <x-nav-link> --}}
+                        <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
                             Teams
                         </x-nav-link>
                     @endrole

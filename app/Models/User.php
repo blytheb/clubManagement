@@ -29,4 +29,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($roles)
+    {
+        if (is_array($roles)){
+            return $this->roles()->whereIn('name', $roles)->exists();
+        }
+
+        return $this->roles()->where('name', $roles)->exists();
+    }
 }

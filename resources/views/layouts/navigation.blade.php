@@ -15,6 +15,20 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @role('admin')
+                    <x-nav-link>
+                        {{-- <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')"> --}}
+                            Teams
+                        </x-nav-link>
+                    @endrole
+
+                    @role('player')
+                    <x-nav-link>
+                        {{-- <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')"> --}}
+                            Season
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

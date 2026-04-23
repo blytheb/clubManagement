@@ -5,13 +5,16 @@
         </h2>
     </x-slot>
 
-    <form method="POST" action="{{ route('teams.update', $team) }}">
-        @csrf
-        @method('PUT')
+    <x-content>
+        <form method="POST" action="{{ route('teams.update', $team) }}">
+            @csrf
+            @method('PUT')
 
-        <label> Team Name :</label>
-        <input name='name' value="{{ $team->name }}" />
-        <button>Update</button>
-    </form>
+            <label> Team Name :</label>
+            <input name='name' value="{{ $team->name }}" />
+            <button>Update</button>
+        </form>
+    </x-content>
+
 
 </x-app-layout>

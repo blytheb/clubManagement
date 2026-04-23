@@ -5,11 +5,13 @@
         </h2>
     </x-slot>
 
-    <form method="POST" action="{{ route('teams.store') }}">
-        @csrf
-        <label> Team Name :</label>
-        <input name='name' placeholder="team name" />
-        <button>Create</button>
-    </form>
+    <x-content>
+        <form method="POST" action="{{ route('teams.store') }}">
+            @csrf
+            <label> Team Name :</label>
+            <input name='name' placeholder="team name" />
+            <button>Create</button>
+        </form>
+    </x-content>
 
 </x-app-layout>

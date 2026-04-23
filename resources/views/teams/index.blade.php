@@ -5,36 +5,39 @@
         </h2>
     </x-slot>
 
-    <a href="{{ route('teams.create') }}">Create Team</a>
+    <x-content>
+        <a href="{{ route('teams.create') }}">Create Team</a>
 
-    <table class="w-full bg-white shadow rounded">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="p-2 text-left">Team Name</th>
-                <th class="p-2 text-left">Options</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach ($teams as $team)
-                <tr class="border-t">
-                    <td class="p-2">{{ $team->name }}</td>
-                    <td class="p-2 ">
-                        <a href="{{ route('teams.show', $team) }}" class="text-blue-400">View</a>
-                        <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a>
-
-                        <form action="{{ route('teams.destroy', $team) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-
-                            <button onclick="return confirm('Are you sure?')" class="text-red-500">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
+        <table class="w-full bg-white shadow rounded">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="p-2 text-left">Team Name</th>
+                    <th class="p-2 text-left">Options</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                @foreach ($teams as $team)
+                    <tr class="border-t">
+                        <td class="p-2">{{ $team->name }}</td>
+                        <td class="p-2 ">
+                            <a href="{{ route('teams.show', $team) }}" class="text-blue-400">View</a>
+                            <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a>
+
+                            <form action="{{ route('teams.destroy', $team) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button onclick="return confirm('Are you sure?')" class="text-red-500">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </x-content>
+
 
 </x-app-layout>

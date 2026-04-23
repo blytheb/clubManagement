@@ -5,20 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    @role('admin')
-                        <div class="p-4 bg-white shadow">
-                            <h2>Admin Panel</h2>
-                        </div>
-                    @endrole
-                    @role('player')
-                        <div class="p-4 bg-white shadow">
-                            <h2>Player Panel</h2>
-                        </div>
-                    @endrole
+    <x-content>
+        @role('admin')
+            <div class="p-4 bg-white shadow">
+                <h2>Admin Panel</h2>
             </div>
-        </div>
-    </div>
+        @endrole
+        @role('player')
+            <div class="p-4 bg-white shadow">
+                <h2>Player Panel</h2>
+            </div>
+        @endrole
+    </x-content>
+
 </x-app-layout>

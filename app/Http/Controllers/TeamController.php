@@ -43,6 +43,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
+        $team->load('users');
         return view('teams.show', compact('team'));
     }
 

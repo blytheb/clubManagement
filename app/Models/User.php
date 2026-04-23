@@ -43,4 +43,9 @@ class User extends Authenticatable
 
         return $this->roles()->where('name', $roles)->exists();
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
 }

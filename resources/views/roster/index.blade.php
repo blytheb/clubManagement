@@ -6,11 +6,20 @@
     </x-slot>
 
     <x-content>
-        <h2>Roster</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-lg font-bold">Roster</h2>
+            <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('teams.create') }}"  class="inline-flex items-center gap-2">
+                    <x-heroicon-s-plus class="w-4 h-4"/>
+                    New Player for {{ $team->name }}
+                </a>
+            </x-primary-button>
+        </div>
+
 
         <div
             x-data="userSearch({{ $team->id }})"
-            class="relative w-96"
+            class="relative my-4"
             @click.outside="open = false"
         >
 
@@ -21,7 +30,7 @@
                 @input.debounce.300ms="search"
                 placeholder="Search players..."
                 class="border p-2 w-full"
-            >
+           >
 
             <!-- DROPDOWN -->
             <div
@@ -100,14 +109,11 @@
                 @endforeach
             </tbody>
         </table>
-
-        <hr>
-
-        <button><a href="{{ route('roster.create', $team) }}">Add Player</a></button>
     </x-content>
 
+
     <x-content>
-        <h2 class="text-lg font-bold mt-6">Events</h2>
+        <h2 class="text-lg font-bold">Events</h2>
 
         @if ($team->events->isEmpty())
             <p class="text-gray-500">No events for this team</p>

@@ -1,13 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Teams
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                All Teams
+            </h2>
+            <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('teams.create') }}"  class="inline-flex items-center gap-2">
+                    <x-heroicon-s-plus class="w-4 h-4"/>
+                    New Team
+                </a>
+            </x-primary-button>
+        </div>
+
     </x-slot>
 
     <x-content>
-        <a href="{{ route('teams.create') }}">Create Team</a>
-
         <table class="w-full bg-white shadow rounded">
             <thead class="bg-gray-200">
                 <tr>
@@ -37,26 +44,6 @@
                 @endforeach
             </tbody>
         </table>
-    </x-content>
-
-    <x-content>
-        <h2 class="text-lg font-bold mt-6">Events</h2>
-
-        @if ($team->events->isEmpty())
-            <p class="text-gray-500">No events for this team</p>
-        @endif
-
-        @foreach ($team->events as $event)
-            <div class="p-3 border-b">
-                <div class="font-semibold">
-                    {{ $event->name }}
-                </div>
-
-                <div class="text-sm text-gray-500">
-                    {{ $event->event_date }}
-                </div>
-            </div>
-        @endforeach
     </x-content>
 
 </x-app-layout>

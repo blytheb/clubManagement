@@ -19,10 +19,10 @@
                     @role('admin')
                     {{-- <x-nav-link> --}}
                         <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
-                            Teams
+                            All Teams
                         </x-nav-link>
                         <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.*')">
-                            Events
+                            All Events
                         </x-nav-link>
 
                     @endrole

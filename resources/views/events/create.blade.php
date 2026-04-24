@@ -23,15 +23,15 @@
 
     <input type="datetime-local" name="eventDate" required>
 
-    {{-- @if(isset($team))
+    @if(isset($team))
         <input type="hidden" name="team_id" value="{{ $team->id }}">
-    @else --}}
+    @else
         <select name="team_id">
             @foreach($teams as $t)
                 <option value="{{ $t->id }}">{{ $t->name }}</option>
             @endforeach
         </select>
-    {{-- @endif --}}
+    @endif
 
     <button>Create Event</button>
 </form>

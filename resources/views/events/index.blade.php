@@ -1,8 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Events
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                All Events
+            </h2>
+            <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('events.create') }}"  class="inline-flex items-center gap-2">
+                    <x-heroicon-s-plus class="w-4 h-4"/>
+                    New Event
+                </a>
+            </x-primary-button>
+        </div>
     </x-slot>
 
 
@@ -65,9 +73,6 @@
         </form> --}}
     </x-content>
 
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        <a href="{{ route('events.create') }}" >Create Event</a>
-    </button>
 
 
 </x-app-layout>

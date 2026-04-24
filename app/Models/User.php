@@ -48,4 +48,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Team::class);
     }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class)
+        ->withPivot('attended')
+        ->withTimestamps();
+    }
 }

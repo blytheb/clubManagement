@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamRosterController;
@@ -57,9 +58,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/teams/{team}/createPlayer', [TeamRosterController::class, 'createPlayer'])             //form to create a player to add to this roster
         ->name('roster.create');
     Route::post('/teams/{team}', [TeamRosterController::class, 'storePlayer'])->name('roster.storePlayer');
+    Route::delete('/teams/{team}/removePlayer', [TeamRosterController::class, 'removePlayer'])->name('roster.removePlayer');
 
     Route::get('/users/search', [UserController::class, 'search'])->name('user.search');
-    Route::delete('/teams/{team}/removePlayer', [TeamRosterController::class, 'removePlayer'])->name('roster.removePlayer');
+
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');                        //list of all teams
+
 
 });
 

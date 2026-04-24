@@ -27,16 +27,20 @@
                 @foreach ($teams as $team)
                     <tr class="border-t">
                         <td class="p-2">{{ $team->name }}</td>
-                        <td class="p-2 ">
-                            <a href="{{ route('roster.index', $team) }}" class="text-blue-400">View</a>
-                            <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a>
+                        <td class="p-2 flex gap-4 ">
+                            <a href="{{ route('roster.index', $team) }}" class="text-blue-400">
+                                <x-heroicon-s-eye class="w-4 h-4"/>
+                            </a>
+                            <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">
+                                <x-heroicon-s-pencil class="w-4 h-4"/>
+                            </a>
 
                             <form action="{{ route('teams.destroy', $team) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <button onclick="return confirm('Are you sure?')" class="text-red-500">
-                                    Delete
+                                    <x-heroicon-s-trash class="w-4 h-4"/>
                                 </button>
                             </form>
                         </td>

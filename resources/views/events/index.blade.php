@@ -36,16 +36,20 @@
                         <td class="p-2">{{ $event->team->name ?? 'No Team' }}</td>
                         <td class="p-2">{{ $event->users->count() }}</td>
 
-                        <td class="p-2 ">
-                            <a href="{{ route('roster.index', $event) }}" class="text-blue-400">View</a>
-                            <a href="{{ route('teams.edit', $event) }}" class="text-blue-400">Edit</a>
+                        <td class="p-2 flex gap-4">
+                            <a href="{{ route('roster.index', $event) }}" class="text-blue-400">
+                                <x-heroicon-s-eye class="w-4 h-4"/>
+                            </a>
+                            <a href="{{ route('teams.edit', $event) }}" class="text-blue-400">
+                                <x-heroicon-s-pencil class="w-4 h-4"/>
+                            </a>
 
                             <form action="{{ route('teams.destroy', $event) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 
                                 <button onclick="return confirm('Are you sure?')" class="text-red-500">
-                                    Delete
+                                    <x-heroicon-s-trash class="w-4 h-4"/>
                                 </button>
                             </form>
                         </td>

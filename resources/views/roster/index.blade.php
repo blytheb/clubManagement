@@ -16,18 +16,15 @@
         <div>
             {{ $user->name }}
         </div>
+        <div>
+            {{ $user->email }}
+        </div>
         @endforeach
 
         <hr>
 
-        <h3>Add Player</h3>
+        {{-- <button><a href="{{ route('teams.roster.add', $team) }}">Add Player</a></button> --}}
 
-        <form method='POST' action="{{ route('teams.roster.add', $team) }}">
-            @csrf
-
-            <input type="number" name="user_id" placeholder="User ID">
-            <button> Add </button>
-        </form>
 
     </x-content>
 </x-app-layout>

@@ -21,7 +21,7 @@
                     <tr class="border-t">
                         <td class="p-2">{{ $team->name }}</td>
                         <td class="p-2 ">
-                            <a href="{{ route('teams.show', $team) }}" class="text-blue-400">View</a>
+                            <a href="{{ route('roster.index', $team) }}" class="text-blue-400">View</a>
                             <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a>
 
                             <form action="{{ route('teams.destroy', $team) }}" method="POST">

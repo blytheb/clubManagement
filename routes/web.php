@@ -47,14 +47,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');                        //list of all teams
     Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');               //form to create a new team
-    Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');              //
-    Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
-    Route::put('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
-    Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+    Route::get('/teams/{team}/edit', [TeamController::class, 'edit'])->name('teams.edit');              //form to edit current team
+    Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');                       //backend to save created team
+    Route::put('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');               //backend to update team
+    Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');          //backend to delete team
 
-    Route::get('/teams/{team}', [TeamRosterController::class, 'index'])->name('roster.index');
-    Route::get('/teams/{team}/addPlayer', [TeamRosterController::class, 'createRoster'])->name('teams.roster.create');
-    Route::post('/teams/{team}', [TeamController::class, 'storePlayer'])->name('teams.roster.storePlayer');
+    Route::get('/teams/{team}', [TeamRosterController::class, 'index'])->name('roster.index');          //list all users on roster
+    Route::get('/teams/{team}/createPlayer', [TeamRosterController::class, 'createPlayer'])             //form to create a player to add to this roster
+        ->name('roster.create');
+    Route::post('/teams/{team}', [TeamRosterController::class, 'storePlayer'])->name('roster.storePlayer');
 
     // Route::delete('/teams/{team}/roster/remove/{user}', [TeamRosterController::class, 'removePlayer'])->name('teams.roster.remove');
 

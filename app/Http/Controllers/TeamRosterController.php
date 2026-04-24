@@ -16,30 +16,34 @@ class TeamRosterController extends Controller
     }
 
     //display route to build roster
-    public function createRoster(Team $team)
+    public function createPlayer(Team $team)
     {
-        return view('teams.roster.create', compact('team'));
+        return view('roster.create', compact('team'));
     }
 
     //backend to store selected player to roster
     public function storePlayer(Request $request, Team $team)
     {
         $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users,email']
         ]);
 
-        $user = User::findOrFail($request->user_id);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('password123'),
+        ]);
 
-        if(!$user->hasRole('player')) {
-            return back()->with('error', 'User is not a player.');
-        }
+        $role = Role::where('name', 'player')->first();
+
+        $user->roles()->syncWithoutDetaching([$role->id]);
 
         $team->users()->syncWithoutDetaching([$user->id]);
 
-        return back()->with('success', 'Player added to roster');
+        return redirect()->route('roster.index', $team);
     }
-
-    public function createPlayer(Request $request, Team $team)
+    public function addPlayer(Request $request, Team $team)
     {
         // validate input
         $request->validate([

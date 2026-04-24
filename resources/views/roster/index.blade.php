@@ -87,10 +87,10 @@
                             {{-- <a href="{{ route('roster.index', $team) }}" class="text-blue-400">View</a>
                             <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a> --}}
 
-                            <form action="{{ route('teams.destroy', $team) }}" method="POST">
+                            <form action="{{ route('roster.removePlayer', $team) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-
+                                <input type="hidden" name="user_id" value="{{ $user->id }}" />
                                 <button onclick="return confirm('Are you sure?')" class="text-red-500">
                                     Delete
                                 </button>

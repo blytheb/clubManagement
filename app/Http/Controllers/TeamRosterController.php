@@ -49,41 +49,16 @@ class TeamRosterController extends Controller
 
         return redirect()->route('roster.index', $team);
     }
-    public function addPlayer(Request $request, Team $team)
+
+
+    public function removePlayer(Request $request, Team $team)
     {
-        // validate input
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'user_id' => ['required', 'exists:users,id']
         ]);
 
-        // 1. Find existing user OR create new one
-        $user = User::firstOrCreate(
-            ['email' => $request->email], // lookup
-            [
-                'name' => $request->name,
-                'password' => Hash::make('default123') // or generate random
-            ]
-        );
+        $team->users()->detach($request->user_id);
 
-        // 2. Assign "player" role
-        $playerRole = Role::where('name', 'player')->first();
-
-        if (!$user->roles->contains($playerRole->id)) {
-            $user->roles()->attach($playerRole->id);
-        }
-
-        // 3. Attach user to team (no duplicates)
-        $team->users()->syncWithoutDetaching([$user->id]);
-
-        return back()->with('success', 'Player added to team');
-
+        return redirect()->route('roster.index', $team);
     }
-
-    // public function removePlayer(Team $team, User $user)
-    // {
-    //     $team->users()->detach($user->id);
-
-    //     return back()->with('success', 'Player removed from roster');
-    // }
 }

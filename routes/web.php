@@ -59,7 +59,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/teams/{team}', [TeamRosterController::class, 'storePlayer'])->name('roster.storePlayer');
 
     Route::get('/users/search', [UserController::class, 'search'])->name('user.search');
-    // Route::delete('/teams/{team}/roster/remove/{user}', [TeamRosterController::class, 'removePlayer'])->name('teams.roster.remove');
+    Route::delete('/teams/{team}/removePlayer', [TeamRosterController::class, 'removePlayer'])->name('roster.removePlayer');
 
 });
 

@@ -33,18 +33,25 @@
                     <div class="p-2 hover:bg-gray-100 flex justify-between">
 
                         <span x-text="user.name"></span>
+                        {{-- IF NOT IN TEAM --}}
+                        <template x-if="!teamUserIds.includes(user.id)">
+                            <form method="POST" action="{{ route('roster.storePlayer', $team) }}">
+                                @csrf
 
-                        <!-- ADD BUTTON -->
-                        <form method="POST" :action="{{ route('roster.storePlayer', $team) }}">
-                            @csrf
+                                <input type="hidden" name="user_id" :value="user.id">
 
-                            <input type="hidden" name="user_id" :value="user.id">
+                                <button class="text-blue-600">
+                                    Add
+                                </button>
+                            </form>
+                        </template>
 
-                            <button class="text-blue-600">
-                                Add
-                            </button>
-                        </form>
-
+                        {{-- IF ALREADY IN TEAM --}}
+                        <template x-if="teamUserIds.includes(user.id)">
+                            <span class="text-gray-400 tesxt-sm">
+                                Already in team
+                            </span>
+                        </template>
                     </div>
                 </template>
 
@@ -103,6 +110,7 @@
 </x-app-layout>
 
 <script>
+    window.teamUserIds = @json($team->users->pluck('id'));
     function userSearch(teamId) {
         return {
             teamId: teamId,

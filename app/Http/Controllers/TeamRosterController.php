@@ -24,16 +24,22 @@ class TeamRosterController extends Controller
     //backend to store selected player to roster
     public function storePlayer(Request $request, Team $team)
     {
-        $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email']
-        ]);
+        if ($request->user_id){
+            $user= User::findOrFail($request->user_id);
+        }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt('password123'),
-        ]);
+        else {
+            $request->validate([
+                'name' => ['required', 'string'],
+                'email' => ['required', 'email', 'unique:users,email']
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt('password123'),
+            ]);
+        }
 
         $role = Role::where('name', 'player')->first();
 

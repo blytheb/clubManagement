@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
-abstract class UserController
+class UserController extends Controller
 {
     public function search(Request $request){
-        return User::where('name', 'like', '%{$request->q}%')
+        $q = $request->input('q');
+
+        if (!$q) {
+            return response()->json();
+        }
+        return User::where('name', 'like', "%{$q}%")
+        ->orWhere('email', 'like', "%{$q}%")
         ->limit(10)
         ->get();
     }

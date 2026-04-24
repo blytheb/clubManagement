@@ -8,6 +8,56 @@
     <x-content>
         <h2>Roster</h2>
 
+        <div
+            x-data="userSearch({{ $team->id }})"
+            class="relative w-96"
+            @click.outside="open = false"
+        >
+
+            <!-- SEARCH INPUT -->
+            <input
+                type="text"
+                x-model="query"
+                @input.debounce.300ms="search"
+                placeholder="Search players..."
+                class="border p-2 w-full"
+            >
+
+            <!-- DROPDOWN -->
+            <div
+                x-show="open"
+                class="class="absolute bg-white border w-full mt-1 z-50 max-h-60 overflow-y-auto"
+            >
+
+                <template x-for="user in results" :key="user.id">
+                    <div class="p-2 hover:bg-gray-100 flex justify-between">
+
+                        <span x-text="user.name"></span>
+
+                        <!-- ADD BUTTON -->
+                        <form method="POST" :action="{{ route('roster.storePlayer', $team) }}">
+                            @csrf
+
+                            <input type="hidden" name="user_id" :value="user.id">
+
+                            <button class="text-blue-600">
+                                Add
+                            </button>
+                        </form>
+
+                    </div>
+                </template>
+
+                <!-- NO RESULTS -->
+                <div
+                    x-show="results.length === 0 && query.length > 2"
+                    class="p-2 text-gray-500"
+                >
+                    No users found
+                </div>
+            </div>
+        </div>
+
         @if($team->users->isEmpty())
         <p>NO PLAYERS ON THIS ROSTER</p>
         @endif
@@ -51,3 +101,30 @@
 
     </x-content>
 </x-app-layout>
+
+<script>
+    function userSearch(teamId) {
+        return {
+            teamId: teamId,
+            query: '',
+            results: [],
+            open: false,
+
+            search() {
+                console.log(this.query);
+                if (this.query.length < 2) {
+                    this.results = [];
+                    this.open = false;
+                    return;
+                }
+
+                fetch(`/users/search?q=${this.query}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.results = data;
+                        this.open = true;
+                    });
+            }
+        }
+    }
+    </script>

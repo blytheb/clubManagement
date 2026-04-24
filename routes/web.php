@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamRosterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('roster.create');
     Route::post('/teams/{team}', [TeamRosterController::class, 'storePlayer'])->name('roster.storePlayer');
 
+    Route::get('/users/search', [UserController::class, 'search'])->name('user.search');
     // Route::delete('/teams/{team}/roster/remove/{user}', [TeamRosterController::class, 'removePlayer'])->name('teams.roster.remove');
 
 });

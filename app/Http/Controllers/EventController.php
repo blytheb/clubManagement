@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -22,7 +23,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $teams = Team::all();
+        return view('events.create', compact('teams'));
     }
 
     /**
@@ -30,7 +32,20 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'eventDate' => ['required', 'date'],
+            'team_id' => ['nullable', 'exists:teams,id'],
+        ]);
+
+        $team = Team::findOrFail($request->team_id);
+
+        $team->events()->create([
+            'name' => $request->name,
+            'eventDate' => $request->eventDate,
+        ]);
+
+        return redirect()->route('events.index');
     }
 
     /**

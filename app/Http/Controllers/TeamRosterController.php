@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class TeamRosterController extends Controller
 {
     public function index(Team $team){
-        $team->load('users');
+        $team->load(['users', 'events']);
         return view('roster.index', compact('team'));
     }
 

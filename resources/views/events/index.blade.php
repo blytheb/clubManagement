@@ -5,14 +5,16 @@
         </h2>
     </x-slot>
 
+
+
     <x-content>
-        {{-- <a href="{{ route('teams.create') }}">Create Team</a> --}}
 
         <table class="w-full bg-white shadow rounded">
             <thead class="bg-gray-200">
                 <tr>
+                    <th class="p-2 text-left">Date</th>
                     <th class="p-2 text-left">Event Name</th>
-                    <th class="p-2 text-left">Team Event</th>
+                    <th class="p-2 text-left">Team</th>
                     <th class="p-2 text-left">Attendance</th>
                     <th class="p-2 text-left">Options</th>
                 </tr>
@@ -21,6 +23,7 @@
             <tbody>
                 @foreach ($events as $event)
                     <tr class="border-t">
+                        <td class="p-2">{{ $event->eventDate }}</td>
                         <td class="p-2">{{ $event->name }}</td>
                         <td class="p-2">{{ $event->team->name ?? 'No Team' }}</td>
                         <td class="p-2">{{ $event->users->count() }}</td>
@@ -61,6 +64,10 @@
             <button>Save Attendance</button>
         </form> --}}
     </x-content>
+
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('events.create') }}" >Create Event</a>
+    </button>
 
 
 </x-app-layout>

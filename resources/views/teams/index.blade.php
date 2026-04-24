@@ -39,5 +39,24 @@
         </table>
     </x-content>
 
+    <x-content>
+        <h2 class="text-lg font-bold mt-6">Events</h2>
+
+        @if ($team->events->isEmpty())
+            <p class="text-gray-500">No events for this team</p>
+        @endif
+
+        @foreach ($team->events as $event)
+            <div class="p-3 border-b">
+                <div class="font-semibold">
+                    {{ $event->name }}
+                </div>
+
+                <div class="text-sm text-gray-500">
+                    {{ $event->event_date }}
+                </div>
+            </div>
+        @endforeach
+    </x-content>
 
 </x-app-layout>

@@ -62,7 +62,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/users/search', [UserController::class, 'search'])->name('user.search');
 
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');                        //list of all teams
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');                        //list of all events
+    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');               //form to create new event
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');             //for to edit a certain event
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');                       //backend to save a created event
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');              //backend to update event
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');         //for to edit a certain event
+
 
 
 });

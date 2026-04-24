@@ -41,11 +41,10 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(Team $team)
-    // {
-    //     $team->load('users');
-    //     return view('teams.show', compact('team'));
-    // }
+    public function show(Team $team)
+    {
+//
+    }
 
     /**
      * Show the form for editing the specified resource.

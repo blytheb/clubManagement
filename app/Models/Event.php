@@ -10,6 +10,12 @@ class Event extends Model
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'eventDate',
+        'team_id'
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class)

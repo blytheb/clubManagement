@@ -78,7 +78,14 @@
         <p>NO PLAYERS ON THIS ROSTER</p>
         @endif
 
-        <table class="w-full bg-white shadow rounded">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach ($team->users as $user )
+            <x-player-card :user="$user" :team="$team" />
+        @endforeach
+        </div>
+
+
+        {{-- <table class="w-full bg-white shadow rounded">
             <thead class="bg-gray-200">
                 <tr>
                     <th class="p-2 text-left">Player Name</th>
@@ -94,7 +101,7 @@
                         <td class="p-2">{{ $user->email }}</td>
                         <td class="p-2 ">
                             {{-- <a href="{{ route('roster.index', $team) }}" class="text-blue-400">View</a>
-                            <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a> --}}
+                            <a href="{{ route('teams.edit', $team) }}" class="text-blue-400">Edit</a>
 
                             <form action="{{ route('roster.removePlayer', $team) }}" method="POST">
                                 @csrf
@@ -108,7 +115,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
     </x-content>
 
 

@@ -37,14 +37,14 @@
                         <td class="p-2">{{ $event->users->count() }}</td>
 
                         <td class="p-2 flex gap-4">
-                            <a href="{{ route('roster.index', $event) }}" class="text-blue-400">
+                            <a href="{{ route('events.index') }}" class="text-blue-400">
                                 <x-heroicon-s-eye class="w-4 h-4"/>
                             </a>
-                            <a href="{{ route('teams.edit', $event) }}" class="text-blue-400">
+                            <a href="{{ route('events.edit', $event) }}" class="text-blue-400">
                                 <x-heroicon-s-pencil class="w-4 h-4"/>
                             </a>
 
-                            <form action="{{ route('teams.destroy', $event) }}" method="POST">
+                            <form action="{{ route('events.destroy', $event) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
 

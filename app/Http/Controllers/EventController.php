@@ -61,7 +61,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $teams = Team::all();
+        return view('events.edit', compact('event', 'teams'));
     }
 
     /**
@@ -69,14 +70,24 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string'],
+            'eventDate' => ['required', 'date'],
+            'team_id' => ['required', 'exists:teams,id'],
+        ]);
+
+        $event->update($validated);
+
+        return redirect()->route('events.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->route('events.index');
     }
 }
